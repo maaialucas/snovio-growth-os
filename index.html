@@ -3,1127 +3,362 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Snov.io Growth OS</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Lucas Maia Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#090c10;
-  --surface:#0f1318;
-  --surface2:#141820;
-  --surface3:#1a1f2a;
-  --border:rgba(255,255,255,0.07);
-  --accent:#00e5a0;
-  --accent2:#ff5757;
-  --accent3:#5b8fff;
-  --accent4:#f0c040;
-  --accent5:#ff9d3d;
-  --text:#dde3ee;
-  --muted:#5a6478;
-  --muted2:#8896ac;
-  --green:#00e5a0;
-  --red:#ff5757;
-  --blue:#5b8fff;
-  --amber:#f0c040;
+  --bg:#FAFAF8;--bg2:#F3F2EF;--card:#FFFFFF;
+  --border:#E8E6E1;--border-h:#C8C4BB;
+  --acc:#1A1A1A;--acc2:#3D3D3D;
+  --tp:#111110;--ts:#6B6860;--tm:#A8A49C;
+  --tag-bg:#F0EEE9;--tag-c:#5A5750;
+  --live-bg:#ECFDF5;--live-c:#059669;
+  --sh:0 1px 3px rgba(0,0,0,0.04),0 4px 12px rgba(0,0,0,0.06);
+  --sh-lg:0 2px 8px rgba(0,0,0,0.04),0 12px 40px rgba(0,0,0,0.08);
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;min-height:100vh;font-size:13px;}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tp);font-size:15px;line-height:1.6;min-height:100vh}
 
-body::before{content:'';position:fixed;top:-40%;left:-20%;width:80vw;height:80vh;background:radial-gradient(ellipse,rgba(0,229,160,0.04) 0%,transparent 70%);pointer-events:none;z-index:0;}
-body::after{content:'';position:fixed;bottom:-30%;right:-20%;width:70vw;height:70vh;background:radial-gradient(ellipse,rgba(91,143,255,0.05) 0%,transparent 70%);pointer-events:none;z-index:0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,248,0.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:18px;color:var(--tp);letter-spacing:-0.02em}
+.nav-right{display:flex;align-items:center;gap:28px}
+.nav-link{font-size:13px;color:var(--ts);text-decoration:none;font-weight:500;transition:.2s}
+.nav-link:hover{color:var(--tp)}
+.lang-toggle{display:flex;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:3px;gap:2px}
+.lang-btn{padding:4px 12px;border-radius:16px;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;background:transparent;color:var(--ts);letter-spacing:.04em}
+.lang-btn.active{background:#fff;color:var(--tp);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
 
-.shell{display:flex;height:100vh;overflow:hidden;position:relative;z-index:1;}
+.hero{padding:140px 40px 80px;max-width:900px;margin:0 auto}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:var(--tag-bg);color:var(--tag-c);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:500;margin-bottom:24px;letter-spacing:.04em;border:1px solid var(--border)}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--live-c)}
+.hero-name{font-family:'DM Serif Display',serif;font-size:clamp(42px,7vw,72px);line-height:1.05;letter-spacing:-0.03em;color:var(--tp);margin-bottom:12px}
+.hero-name em{font-style:italic;color:var(--ts)}
+.hero-sub{font-size:18px;color:var(--ts);max-width:520px;line-height:1.6;margin-bottom:36px;font-weight:300}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--tp);color:#fff;padding:12px 24px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;text-decoration:none;letter-spacing:.02em;transition:.2s;border:1px solid var(--tp)}
+.btn-primary:hover{background:var(--acc2);border-color:var(--acc2)}
+.btn-sec{background:transparent;color:var(--tp);padding:12px 24px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;text-decoration:none;transition:.2s;border:1px solid var(--border)}
+.btn-sec:hover{border-color:var(--border-h);background:var(--bg2)}
 
-/* ─── Sidebar ─── */
-.sidebar{width:230px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;}
-.sidebar-logo{padding:24px 22px 20px;border-bottom:1px solid var(--border);}
-.logo-text{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.5px;color:var(--text);}
-.logo-text span{color:var(--accent);}
-.logo-tag{font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:3px;}
+.section{max-width:900px;margin:0 auto;padding:0 40px 80px}
+.section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--tm);margin-bottom:32px;display:flex;align-items:center;gap:12px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
 
-.sidebar-scroll{flex:1;overflow-y:auto;padding:14px 10px;}
-.sidebar-scroll::-webkit-scrollbar{width:0;}
-.nav-section{margin-bottom:22px;}
-.nav-section-label{font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;padding:0 12px;margin-bottom:6px;}
-.nav-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:7px;cursor:pointer;font-size:11px;color:var(--muted2);transition:all .15s;position:relative;}
-.nav-item:hover{background:var(--surface2);color:var(--text);}
-.nav-item.active{background:rgba(0,229,160,0.1);color:var(--accent);}
-.nav-item.active::before{content:'';position:absolute;left:0;top:20%;height:60%;width:2px;background:var(--accent);border-radius:0 2px 2px 0;}
-.nav-icon{width:16px;text-align:center;font-size:13px;}
-.badge-count{margin-left:auto;font-size:9px;background:var(--red);color:#fff;padding:2px 6px;border-radius:20px;}
-.badge-new{margin-left:auto;font-size:9px;background:rgba(0,229,160,0.15);color:var(--accent);padding:2px 6px;border-radius:20px;}
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;transition:.25s;cursor:default;display:flex;flex-direction:column}
+.proj-card:hover{border-color:var(--border-h);box-shadow:var(--sh-lg);transform:translateY(-2px)}
+.proj-card.featured{grid-column:span 2}
+.proj-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.proj-icon{font-size:28px;line-height:1}
+.proj-badges{display:flex;gap:6px;flex-wrap:wrap}
+.badge{padding:3px 9px;border-radius:12px;font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase}
+.badge.live{background:var(--live-bg);color:var(--live-c);border:1px solid rgba(5,150,105,0.2)}
+.badge.internal{background:#EFF6FF;color:#2563EB;border:1px solid rgba(37,99,235,0.2)}
+.badge.wip{background:#FEFCE8;color:#A16207;border:1px solid rgba(161,98,7,0.2)}
+.badge.personal{background:#F5F3FF;color:#7C3AED;border:1px solid rgba(124,58,237,0.2)}
+.proj-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--tp);margin-bottom:8px;line-height:1.2}
+.proj-desc{font-size:14px;color:var(--ts);line-height:1.6;flex:1;margin-bottom:16px}
+.proj-stack{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.stack-tag{background:var(--tag-bg);color:var(--tag-c);padding:3px 9px;border-radius:8px;font-size:11px;font-weight:500;border:1px solid var(--border)}
 
-.sidebar-bottom{padding:16px 16px;border-top:1px solid var(--border);}
-.sidebar-stat-label{font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;}
-.sidebar-stat-val{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:var(--red);}
-.sidebar-stat-sub{font-size:10px;color:var(--muted);margin-top:2px;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.about-text p{font-size:15px;color:var(--ts);line-height:1.8;margin-bottom:16px;font-weight:300}
+.about-text p:last-child{margin-bottom:0}
+.about-text strong{color:var(--tp);font-weight:600}
+.skills-list{display:flex;flex-direction:column;gap:10px}
+.skill-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:13px}
+.skill-name{font-weight:500;color:var(--tp)}
+.skill-level{font-size:11px;color:var(--ts);font-weight:500}
 
-/* ─── Main ─── */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.contact-card{background:var(--tp);color:#fff;border-radius:20px;padding:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
+.contact-title{font-family:'DM Serif Display',serif;font-size:32px;line-height:1.2;margin-bottom:8px}
+.contact-sub{font-size:14px;opacity:.6;font-weight:300}
+.contact-btn{background:#fff;color:var(--tp);padding:14px 28px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;text-decoration:none;letter-spacing:.02em;white-space:nowrap;transition:.2s;flex-shrink:0}
+.contact-btn:hover{opacity:.9}
 
-.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28px;height:52px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-.topbar-left{display:flex;align-items:center;gap:14px;}
-.crumb{font-size:11px;color:var(--muted);}
-.crumb b{color:var(--text);}
-.period-sel{background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:10px;padding:5px 10px;border-radius:6px;cursor:pointer;}
-.topbar-right{display:flex;align-items:center;gap:8px;}
-.search-box{background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:11px;padding:6px 12px;border-radius:6px;width:190px;outline:none;}
-.search-box:focus{border-color:rgba(255,255,255,0.2);}
-.btn{padding:7px 15px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;border:none;transition:all .15s;letter-spacing:.3px;}
-.btn-ghost{background:var(--surface2);border:1px solid var(--border);color:var(--muted2);}
-.btn-ghost:hover{color:var(--text);border-color:rgba(255,255,255,0.15);}
-.btn-accent{background:var(--accent);color:#090c10;font-weight:500;}
-.btn-accent:hover{background:#00fbb5;transform:translateY(-1px);}
+footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:0 auto}
+.footer-name{font-family:'DM Serif Display',serif;font-size:15px;color:var(--tp)}
+.footer-copy{font-size:12px;color:var(--tm)}
 
-.content{flex:1;overflow-y:auto;padding:28px;}
-.content::-webkit-scrollbar{width:5px;}
-.content::-webkit-scrollbar-track{background:transparent;}
-.content::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px;}
+.proj-wabtn:hover{background:#D1FAE5}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero{animation:fadeUp .6s ease both}
 
-/* ─── Pages ─── */
-.page{display:none;}
-.page.active{display:block;animation:fadeUp .35s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
-/* ─── Page header ─── */
-.page-header{margin-bottom:24px;}
-.page-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:var(--text);}
-.page-title span{color:var(--accent);}
-.page-sub{font-size:11px;color:var(--muted);margin-top:4px;display:flex;align-items:center;gap:8px;}
-.live-dot{display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);}}
-
-/* ─── KPI strip ─── */
-.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
-.kpi-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;position:relative;overflow:hidden;cursor:pointer;transition:border-color .15s,transform .15s;}
-.kpi-box:hover{border-color:rgba(255,255,255,0.14);transform:translateY(-2px);}
-.kpi-box::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:10px 10px 0 0;}
-.kpi-box.green::after{background:var(--accent);}
-.kpi-box.red::after{background:var(--red);}
-.kpi-box.blue::after{background:var(--blue);}
-.kpi-box.amber::after{background:var(--amber);}
-.kpi-box.orange::after{background:var(--accent5);}
-.kpi-label{font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
-.kpi-val{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;line-height:1;margin-bottom:5px;}
-.kpi-val.green{color:var(--accent);}
-.kpi-val.red{color:var(--red);}
-.kpi-val.blue{color:var(--blue);}
-.kpi-val.amber{color:var(--amber);}
-.kpi-val.orange{color:var(--accent5);}
-.kpi-meta{font-size:10px;color:var(--muted);}
-.kpi-meta b{color:var(--muted2);}
-
-/* ─── Grids ─── */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
-.grid-31{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px;}
-.grid-13{display:grid;grid-template-columns:1fr 2fr;gap:14px;margin-bottom:14px;}
-
-/* ─── Card ─── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;}
-.card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
-.card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--text);}
-.card-sub{font-size:10px;color:var(--muted);margin-top:2px;}
-.chip{font-size:9px;padding:3px 9px;border-radius:20px;font-weight:500;letter-spacing:.5px;white-space:nowrap;}
-.chip-green{background:rgba(0,229,160,0.12);color:var(--accent);}
-.chip-red{background:rgba(255,87,87,0.12);color:var(--red);}
-.chip-blue{background:rgba(91,143,255,0.12);color:var(--blue);}
-.chip-amber{background:rgba(240,192,64,0.12);color:var(--amber);}
-
-/* ─── Bar chart ─── */
-.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
-.bar-lbl{font-size:10px;color:var(--muted2);width:150px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.bar-track{flex:1;background:var(--surface2);border-radius:3px;height:24px;overflow:hidden;}
-.bar-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding:0 9px;font-size:10px;font-weight:500;color:#090c10;transition:width .8s cubic-bezier(.4,0,.2,1);}
-.bar-fill.light{color:var(--muted2);}
-.bar-pct{font-size:10px;color:var(--muted);width:30px;text-align:right;flex-shrink:0;}
-
-/* ─── Divider ─── */
-.divider{font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin:20px 0 14px;display:flex;align-items:center;gap:10px;}
-.divider::after{content:'';flex:1;height:1px;background:var(--border);}
-
-/* ─── Segment pills ─── */
-.pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;}
-.pill{font-size:9px;padding:4px 12px;border-radius:20px;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .15s;letter-spacing:.5px;text-transform:uppercase;}
-.pill:hover,.pill.active{background:rgba(0,229,160,0.08);border-color:var(--accent);color:var(--accent);}
-
-/* ─── Month chart ─── */
-.month-chart{display:flex;align-items:flex-end;gap:8px;height:80px;}
-.mc-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
-.mc-bar{width:100%;border-radius:4px 4px 0 0;}
-.mc-label{font-size:9px;color:var(--muted);}
-.mc-val{font-size:9px;color:var(--muted2);}
-
-/* ─── Info rows ─── */
-.info-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:11px;}
-.info-row:last-child{border-bottom:none;}
-.info-row .lbl{color:var(--muted);}
-.info-row .val{font-weight:500;}
-.info-row .val.up{color:var(--accent);}
-.info-row .val.down{color:var(--red);}
-.info-row .val.neutral{color:var(--blue);}
-
-/* ─── Playbook cards ─── */
-.playbook-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;}
-.pb-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden;}
-.pb-card:hover{border-color:rgba(255,255,255,0.15);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
-.pb-card.done{opacity:.55;}
-.pb-card.done::after{content:'✓ DONE';position:absolute;top:10px;right:10px;font-size:8px;background:rgba(0,229,160,0.15);color:var(--accent);padding:2px 8px;border-radius:20px;letter-spacing:1px;}
-.pb-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.pb-company{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.pb-logo{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:#fff;}
-.pb-company-name{font-size:10px;color:var(--muted);}
-.pb-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;margin-bottom:7px;line-height:1.3;}
-.pb-body{font-size:10px;color:var(--muted2);line-height:1.6;margin-bottom:10px;}
-.pb-impact{font-size:9px;color:var(--muted);display:flex;align-items:center;gap:5px;}
-.pb-impact b{color:var(--accent);}
-
-/* ─── Task list ─── */
-.task-item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background .1s;border-radius:4px;}
-.task-item:last-child{border-bottom:none;}
-.task-item:hover{background:rgba(255,255,255,0.02);padding-left:6px;margin-left:-6px;}
-.task-check{width:17px;height:17px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .12s;font-size:9px;}
-.task-check.checked{background:var(--accent);border-color:var(--accent);color:#090c10;}
-.task-body{flex:1;}
-.task-title{font-size:11px;color:var(--text);line-height:1.5;}
-.task-title.done{text-decoration:line-through;color:var(--muted);}
-.task-meta{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap;}
-.task-tag{font-size:9px;padding:2px 7px;border-radius:20px;background:var(--surface2);color:var(--muted);}
-.task-priority{font-size:9px;padding:2px 7px;border-radius:20px;}
-.task-priority.high{background:rgba(255,87,87,0.12);color:var(--red);}
-.task-priority.medium{background:rgba(240,192,64,0.12);color:var(--amber);}
-.task-priority.low{background:rgba(0,229,160,0.12);color:var(--accent);}
-.task-source{font-size:9px;color:var(--muted);font-style:italic;}
-
-/* ─── Insights ─── */
-.insight-card{border-left:2px solid transparent;padding:14px 16px;border-radius:8px;margin-bottom:10px;background:var(--surface);border:1px solid var(--border);border-left-width:2px;}
-.insight-card.red{border-left-color:var(--red);}
-.insight-card.green{border-left-color:var(--accent);}
-.insight-card.blue{border-left-color:var(--blue);}
-.insight-card.amber{border-left-color:var(--amber);}
-.insight-header{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
-.insight-icon{font-size:16px;}
-.insight-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;}
-.insight-card.red .insight-title{color:var(--red);}
-.insight-card.green .insight-title{color:var(--accent);}
-.insight-card.blue .insight-title{color:var(--blue);}
-.insight-card.amber .insight-title{color:var(--amber);}
-.insight-body{font-size:11px;color:var(--muted2);line-height:1.6;}
-.insight-body b{color:var(--text);}
-.insight-cta{display:inline-block;margin-top:8px;font-size:10px;color:var(--blue);cursor:pointer;text-decoration:underline;}
-
-/* ─── Benchmark table ─── */
-.bench-table{width:100%;border-collapse:collapse;}
-.bench-table th{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;padding:8px 10px;border-bottom:1px solid var(--border);text-align:left;}
-.bench-table td{padding:9px 10px;font-size:11px;border-bottom:1px solid rgba(255,255,255,0.03);}
-.bench-table tr:hover td{background:rgba(255,255,255,0.02);}
-.bench-table tr.snov td{background:rgba(240,192,64,0.06);}
-.s-good{font-size:9px;padding:2px 8px;border-radius:20px;background:rgba(0,229,160,0.12);color:var(--accent);}
-.s-warn{font-size:9px;padding:2px 8px;border-radius:20px;background:rgba(240,192,64,0.12);color:var(--amber);}
-.s-bad{font-size:9px;padding:2px 8px;border-radius:20px;background:rgba(255,87,87,0.12);color:var(--red);}
-
-/* ─── Upload ─── */
-.upload-zone{border:2px dashed var(--border);border-radius:8px;padding:28px;text-align:center;cursor:pointer;transition:all .15s;background:var(--surface);}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);background:rgba(0,229,160,0.03);}
-.upload-zone input{display:none;}
-
-/* ─── Modal ─── */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;display:none;align-items:center;justify-content:center;}
-.modal-overlay.open{display:flex;}
-.modal{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:28px;max-width:480px;width:90%;}
-.modal-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:6px;}
-.modal-sub{font-size:11px;color:var(--muted);margin-bottom:20px;}
-.modal-close{float:right;cursor:pointer;font-size:20px;color:var(--muted);line-height:1;}
-.modal-input{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:11px;padding:10px 12px;border-radius:6px;width:100%;outline:none;margin-bottom:10px;}
-.modal-input:focus{border-color:var(--accent);}
-canvas{display:block;}
+@media(max-width:700px){
+  nav{padding:0 20px}
+  .hero{padding:110px 20px 60px}
+  .section{padding:0 20px 60px}
+  .projects-grid{grid-template-columns:1fr}
+  .proj-card.featured{grid-column:span 1}
+  .about-grid{grid-template-columns:1fr}
+  .contact-card{padding:32px}
+  footer{flex-direction:column;gap:8px;text-align:center;padding:24px 20px}
+}
 </style>
 </head>
 <body>
-<div class="shell">
 
-<!-- ═══ SIDEBAR ═══ -->
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="logo-text">snov<span>.</span>io</div>
-    <div class="logo-tag">Growth OS · Data Team</div>
-  </div>
-  <div class="sidebar-scroll">
-    <div class="nav-section">
-      <div class="nav-section-label">Analytics</div>
-      <div class="nav-item active" data-page="overview"><span class="nav-icon">◈</span>Overview</div>
-      <div class="nav-item" data-page="churn"><span class="nav-icon">⟁</span>Churn Analysis<span class="badge-count">570</span></div>
-      <div class="nav-item" data-page="benchmark"><span class="nav-icon">◎</span>Benchmarks Globais</div>
-    </div>
-    <div class="nav-section">
-      <div class="nav-section-label">Playbooks</div>
-      <div class="nav-item" data-page="playbooks"><span class="nav-icon">▣</span>Top 10 Táticas<span class="badge-new">NEW</span></div>
-      <div class="nav-item" data-page="tasks"><span class="nav-icon">☐</span>Plano de Ação</div>
-    </div>
-    <div class="nav-section">
-      <div class="nav-section-label">Insights</div>
-      <div class="nav-item" data-page="alertas"><span class="nav-icon">⚠</span>Alertas<span class="badge-count">3</span></div>
-      <div class="nav-item" data-page="risco"><span class="nav-icon">◎</span>Perfil de Risco</div>
-      <div class="nav-item" data-page="recomendacoes"><span class="nav-icon">✦</span>Recomendações</div>
-    </div>
-    <div class="nav-section">
-      <div class="nav-section-label">Dados</div>
-      <div class="nav-item" data-page="upload"><span class="nav-icon">↑</span>Importar CSV</div>
-      <div class="nav-item" data-page="insights"><span class="nav-icon">◉</span>AI Insights</div>
+<nav>
+  <div class="nav-logo">Lucas Maia</div>
+  <div class="nav-right">
+    <a href="#projects" class="nav-link" data-pt="Projetos" data-en="Projects">Projetos</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
   </div>
-  <div class="sidebar-bottom">
-    <div class="sidebar-stat-label">Total Cancelamentos</div>
-    <div class="sidebar-stat-val">570</div>
-    <div class="sidebar-stat-sub">Dez/25 → Mar/26</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag" data-pt="Sempre construindo algo" data-en="Always building something">Sempre construindo algo</div>
+  <h1 class="hero-name">Lucas<br><em>Maia.</em></h1>
+  <p class="hero-sub" data-pt="Quero fazer a diferença onde trabalho. Estou em Customer Care hoje, mas minha cabeça já está em dados, IA e GTM Engineering porque acredito que tecnologia bem aplicada transforma setores inteiros. Estou construindo esse caminho agora: ADS, APIs, automações, sistemas reais. Um projeto de cada vez." data-en="I want to make a real impact wherever I work. I'm in Customer Care today, but my mind is already on data, AI, and GTM Engineering because I believe well-applied technology can transform entire sectors. I'm building that path right now: Systems Analysis, APIs, automations, real products. One project at a time.">
+    Quero fazer a diferença onde trabalho. Estou em Customer Care hoje, mas minha cabeça já está em dados, IA e GTM Engineering porque acredito que tecnologia bem aplicada transforma setores inteiros. Estou construindo esse caminho agora: ADS, APIs, automações, sistemas reais. Um projeto de cada vez.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn-primary" data-pt="Ver projetos" data-en="See projects">Ver projetos</a>
   </div>
-</aside>
+</div>
 
-<!-- ═══ MAIN ═══ -->
-<div class="main">
-  <div class="topbar">
-    <div class="topbar-left">
-      <div class="crumb">Snov.io Growth OS &rsaquo; <b id="crumb-text">Overview</b></div>
-      <select class="period-sel">
-        <option>Dez/25 – Mar/26</option>
-        <option>Últimos 3 meses</option>
-        <option>Este ano</option>
-      </select>
-    </div>
-    <div class="topbar-right">
-      <input class="search-box" placeholder="Buscar plano, motivo...">
-      <button class="btn btn-ghost" onclick="exportData()">↓ Exportar</button>
-      <button class="btn btn-accent" onclick="showModal()">+ Nova Ação</button>
-    </div>
-  </div>
+<div class="section" id="projects">
+  <div class="section-label" data-pt="Projetos" data-en="Projects">Projetos</div>
+  <div class="projects-grid">
 
-  <div class="content">
-
-    <!-- ════ OVERVIEW ════ -->
-    <div class="page active" id="page-overview">
-      <div class="page-header">
-        <div class="page-title">Growth <span>Overview</span></div>
-        <div class="page-sub"><span class="live-dot"></span>570 cancelamentos reais · Dez/25–Mar/26 · Baseado em Slack, Notion, Figma, HubSpot, Stripe</div>
-      </div>
-
-      <div class="pills">
-        <div class="pill active" onclick="setPill(this)">Todos os planos</div>
-        <div class="pill" onclick="setPill(this)">Starter S</div>
-        <div class="pill" onclick="setPill(this)">Pro M</div>
-        <div class="pill" onclick="setPill(this)">Pro L/XL</div>
-        <div class="pill" onclick="setPill(this)">Team Owners</div>
-        <div class="pill" onclick="setPill(this)">Com LIA</div>
-      </div>
-
-      <div class="kpi-strip">
-        <div class="kpi-box red"><div class="kpi-label">Cancelamentos</div><div class="kpi-val red">570</div><div class="kpi-meta">Últimos <b>4 meses</b></div></div>
-        <div class="kpi-box amber"><div class="kpi-label">Plano dominante</div><div class="kpi-val amber" style="font-size:20px;padding-top:5px">Starter S</div><div class="kpi-meta"><b>69%</b> dos churns</div></div>
-        <div class="kpi-box blue"><div class="kpi-label">Recuperáveis</div><div class="kpi-val blue">225</div><div class="kpi-meta">Pausa + Win-back + Budget</div></div>
-        <div class="kpi-box green"><div class="kpi-label">Mês mais crítico</div><div class="kpi-val green" style="font-size:20px;padding-top:5px">Jan/26</div><div class="kpi-meta"><b>189</b> cancelamentos</div></div>
-      </div>
-
-      <div class="grid-31">
-        <div class="card">
-          <div class="card-header">
-            <div><div class="card-title">Motivos de Cancelamento</div><div class="card-sub">570 registros reais do seu CSV</div></div>
-            <span class="chip chip-red">Dados reais</span>
-          </div>
-          <div id="reasons-bars"></div>
-        </div>
-        <div class="card">
-          <div class="card-header"><div><div class="card-title">Por Mês</div><div class="card-sub">Volume de saídas</div></div></div>
-          <div class="month-chart" id="month-chart"></div>
-          <div style="margin-top:12px">
-            <div class="info-row"><span class="lbl">Pico Jan/26</span><span class="val down">189</span></div>
-            <div class="info-row"><span class="lbl">Média mensal</span><span class="val">~143</span></div>
-            <div class="info-row"><span class="lbl">Mar/26 (parcial)</span><span class="val neutral">79</span></div>
-          </div>
+    <!-- DIY-LI -->
+    <div class="proj-card featured">
+      <div class="proj-header">
+        <div class="proj-icon">✍️</div>
+        <div class="proj-badges">
+          <span class="badge internal" data-pt="Interno" data-en="Internal">Interno</span>
         </div>
       </div>
-
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-header"><div><div class="card-title">Planos no Churn</div><div class="card-sub">Distribuição real</div></div><span class="chip chip-amber">8 planos</span></div>
-          <div id="plans-bars"></div>
-        </div>
-        <div class="card">
-          <div class="card-header"><div><div class="card-title">Engajamento pré-churn</div><div class="card-sub">Pedidos antes de cancelar</div></div></div>
-          <canvas id="engagementDonut" height="160"></canvas>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px;text-align:center">
-            <div style="background:rgba(255,87,87,0.1);border-radius:6px;padding:8px"><div style="font-family:'Syne',sans-serif;font-size:18px;color:var(--red)">43%</div><div style="font-size:9px;color:var(--muted)">1–3 pedidos</div></div>
-            <div style="background:rgba(240,192,64,0.1);border-radius:6px;padding:8px"><div style="font-family:'Syne',sans-serif;font-size:18px;color:var(--amber)">29%</div><div style="font-size:9px;color:var(--muted)">4–10 pedidos</div></div>
-            <div style="background:rgba(0,229,160,0.1);border-radius:6px;padding:8px"><div style="font-family:'Syne',sans-serif;font-size:18px;color:var(--accent)">28%</div><div style="font-size:9px;color:var(--muted)">10+ pedidos</div></div>
-          </div>
-        </div>
+      <div class="proj-title" data-pt="Gerador de Posts para LinkedIn" data-en="LinkedIn Post Generator">Gerador de Posts para LinkedIn</div>
+      <div class="proj-desc" data-pt="Ferramenta que gera posts no estilo de escrita de cada pessoa. Especializada em SaaS, com seleção de tom, assunto e skills de especialistas do mercado para posts que soam humanos, não como IA." data-en="Tool that generates posts in each person's writing style. Specialized in SaaS, with tone selection, topic choice, and market expert skills so posts sound human, not AI-generated.">
+        Ferramenta que gera posts no estilo de escrita de cada pessoa. Especializada em SaaS, com seleção de tom, assunto e skills de especialistas do mercado para posts que soam humanos, não como IA.
+      </div>
+      <div class="proj-stack">
+        <span class="stack-tag">Claude API</span>
+        <span class="stack-tag">JavaScript</span>
+        <span class="stack-tag">Cloudflare Pages</span>
       </div>
     </div>
 
-    <!-- ════ CHURN ════ -->
-    <div class="page" id="page-churn">
-      <div class="page-header">
-        <div class="page-title">Churn <span>Deep Dive</span></div>
-        <div class="page-sub"><span class="live-dot"></span>Análise detalhada · 570 cancelamentos reais</div>
-      </div>
-      <div class="kpi-strip">
-        <div class="kpi-box red"><div class="kpi-label">Starter S</div><div class="kpi-val red">395</div><div class="kpi-meta">69% do churn total</div></div>
-        <div class="kpi-box amber"><div class="kpi-label">Pro M</div><div class="kpi-val amber">122</div><div class="kpi-meta">21% do churn</div></div>
-        <div class="kpi-box blue"><div class="kpi-label">Team Owners</div><div class="kpi-val blue">99</div><div class="kpi-meta">17% são líderes de time</div></div>
-        <div class="kpi-box green"><div class="kpi-label">Com LIA ativo</div><div class="kpi-val green">64</div><div class="kpi-meta">11% usavam LinkedIn Auto</div></div>
-      </div>
-      <div class="card" style="margin-bottom:14px">
-        <div class="card-header">
-          <div><div class="card-title">Heatmap de Risco por Plano</div><div class="card-sub">Volume × impacto × ação recomendada</div></div>
-          <span class="chip chip-red">Ação imediata</span>
-        </div>
-        <div style="overflow-x:auto">
-          <table class="bench-table">
-            <thead><tr><th>Plano</th><th>Cancelamentos</th><th>% Total</th><th>Team Owners</th><th>Com LIA</th><th>Risco</th><th>Ação</th></tr></thead>
-            <tbody>
-              <tr><td><b>Starter S</b></td><td>395</td><td>69%</td><td>~12%</td><td>~8%</td><td><span class="s-bad">CRÍTICO</span></td><td style="color:var(--muted2)">Reformular onboarding · early win triggers</td></tr>
-              <tr><td><b>Pro M</b></td><td>122</td><td>21%</td><td>~22%</td><td>~14%</td><td><span class="s-warn">ALTO</span></td><td style="color:var(--muted2)">CS proativo 30d · upsell para L</td></tr>
-              <tr><td><b>Pro L</b></td><td>22</td><td>4%</td><td>~35%</td><td>~20%</td><td><span class="s-warn">MÉDIO</span></td><td style="color:var(--muted2)">Win-back campaign · custom deal</td></tr>
-              <tr><td><b>Pro S (3M)</b></td><td>15</td><td>3%</td><td>~18%</td><td>~12%</td><td><span class="s-warn">MÉDIO</span></td><td style="color:var(--muted2)">Oferecer plano mensal flexível</td></tr>
-              <tr><td><b>Pro XL+</b></td><td>6</td><td>1%</td><td>~50%</td><td>~30%</td><td><span class="s-good">BAIXO</span></td><td style="color:var(--muted2)">Enterprise motion · CSM dedicado</td></tr>
-            </tbody>
-          </table>
+
+    <!-- QA TRACKER -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">🎯</div>
+        <div class="proj-badges">
+          <span class="badge internal" data-pt="Interno" data-en="Internal">Interno</span>
         </div>
       </div>
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-title" style="margin-bottom:4px">Oportunidades de Recuperação</div>
-          <div class="card-sub" style="margin-bottom:14px">Segmentos com maior chance de win-back</div>
-          <div class="bar-row"><div class="bar-lbl">Win-back (10+ pedidos)</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent)">157</div></div><div class="bar-pct">28%</div></div>
-          <div class="bar-row"><div class="bar-lbl">Pausa de plano</div><div class="bar-track"><div class="bar-fill" style="width:43%;background:var(--blue)">68</div></div><div class="bar-pct">12%</div></div>
-          <div class="bar-row"><div class="bar-lbl">Downgrade (budget)</div><div class="bar-track"><div class="bar-fill" style="width:17%;background:var(--amber)">26</div></div><div class="bar-pct">5%</div></div>
-          <div class="bar-row"><div class="bar-lbl">Alternativa → retorno</div><div class="bar-track"><div class="bar-fill light" style="width:17%;background:var(--muted)">27</div></div><div class="bar-pct">5%</div></div>
-          <div style="margin-top:12px;background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.2);border-radius:7px;padding:12px">
-            <div style="font-family:'Syne',sans-serif;font-size:15px;color:var(--accent)">225 clientes recuperáveis</div>
-            <div style="font-size:10px;color:var(--muted2);margin-top:3px">Com ações direcionadas — 39% do churn pode ser revertido</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title" style="margin-bottom:4px">Padrões nos Comentários</div>
-          <div class="card-sub" style="margin-bottom:10px">Rejection comments reais</div>
-          <div id="comment-tags" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px"></div>
-          <div id="comment-phrases"></div>
-        </div>
+      <div class="proj-title" data-pt="Tracker de Tickets QA" data-en="QA Ticket Tracker">Tracker de Tickets QA</div>
+      <div class="proj-desc" data-pt="Sistema interno criado para que tickets de QA não se percam no processo. Organiza abertos, resolvidos e pendentes em um painel centralizado — visibilidade total do que está em andamento." data-en="Internal system built so QA tickets don't get lost in the process. Organizes open, resolved, and pending tickets in a centralized dashboard — full visibility of what's in progress.">
+        Sistema interno criado para que tickets de QA não se percam no processo. Organiza abertos, resolvidos e pendentes em um painel centralizado — visibilidade total do que está em andamento.
+      </div>
+      <div class="proj-stack">
+        <span class="stack-tag">JavaScript</span>
+        <span class="stack-tag">HTML/CSS</span>
+        <span class="stack-tag">localStorage</span>
       </div>
     </div>
 
-    <!-- ════ BENCHMARK ════ -->
-    <div class="page" id="page-benchmark">
-      <div class="page-header">
-        <div class="page-title">Benchmarks <span>Globais</span></div>
-        <div class="page-sub"><span class="live-dot"></span>Top 10 SaaS do mundo vs Snov.io</div>
-      </div>
-      <div class="card" style="margin-bottom:14px">
-        <div class="card-header">
-          <div><div class="card-title">KPIs de Retenção — Top SaaS vs Snov.io</div><div class="card-sub">Benchmarks públicos 2025–2026 · Databox, ChartMogul, Flowjam</div></div>
-          <span class="chip chip-amber">Snov.io destacado</span>
-        </div>
-        <div style="overflow-x:auto">
-          <table class="bench-table">
-            <thead><tr><th>Empresa</th><th>Segmento</th><th>Churn Mensal</th><th>NRR</th><th>LTV:CAC</th><th>Payback</th><th>Estratégia Anti-churn</th></tr></thead>
-            <tbody>
-              <tr><td><b>Slack</b></td><td style="color:var(--muted)">PLG / Collab</td><td><span class="s-good">~1.5%</span></td><td style="color:var(--accent)">125%+</td><td>8x+</td><td>&lt;6m</td><td style="color:var(--muted2)">Viral loops · 2.000 msgs hook</td></tr>
-              <tr><td><b>Notion</b></td><td style="color:var(--muted)">PLG / Produtividade</td><td><span class="s-good">~2%</span></td><td style="color:var(--accent)">120%+</td><td>7x</td><td>&lt;8m</td><td style="color:var(--muted2)">Templates · comunidade · free tier generoso</td></tr>
-              <tr><td><b>Figma</b></td><td style="color:var(--muted)">PLG / Design</td><td><span class="s-good">~1.8%</span></td><td style="color:var(--accent)">130%+</td><td>9x</td><td>&lt;6m</td><td style="color:var(--muted2)">Colaboração real-time · cross-functional</td></tr>
-              <tr><td><b>HubSpot</b></td><td style="color:var(--muted)">SaaS / CRM</td><td><span class="s-good">~2.5%</span></td><td style="color:var(--accent)">110%</td><td>6x</td><td>12m</td><td style="color:var(--muted2)">Health scores · CS proativo</td></tr>
-              <tr><td><b>Stripe</b></td><td style="color:var(--muted)">Fintech / API</td><td><span class="s-good">~1%</span></td><td style="color:var(--accent)">140%+</td><td>10x</td><td>&lt;4m</td><td style="color:var(--muted2)">Revenue expansion · produtos adicionais</td></tr>
-              <tr><td><b>Salesforce</b></td><td style="color:var(--muted)">Enterprise CRM</td><td><span class="s-good">~3%</span></td><td style="color:var(--accent)">115%</td><td>5x</td><td>18m</td><td style="color:var(--muted2)">CSM dedicado · contratos anuais</td></tr>
-              <tr><td><b>Zoom</b></td><td style="color:var(--muted)">PLG / Video</td><td><span class="s-warn">~4%</span></td><td>105%</td><td>5x</td><td>10m</td><td style="color:var(--muted2)">Free primeiro · onboarding rápido</td></tr>
-              <tr><td><b>Canva</b></td><td style="color:var(--muted)">PLG / Design</td><td><span class="s-good">~2%</span></td><td style="color:var(--accent)">120%</td><td>8x</td><td>&lt;6m</td><td style="color:var(--muted2)">Templates virais · teams como upgrade</td></tr>
-              <tr><td><b>Intercom</b></td><td style="color:var(--muted)">SaaS / CS</td><td><span class="s-warn">~3.5%</span></td><td>112%</td><td>5x</td><td>14m</td><td style="color:var(--muted2)">In-app messaging · triggers de risco</td></tr>
-              <tr><td><b>Datadog</b></td><td style="color:var(--muted)">SaaS / Dev</td><td><span class="s-good">~1.5%</span></td><td style="color:var(--accent)">130%</td><td>9x</td><td>&lt;8m</td><td style="color:var(--muted2)">Usage-based · land &amp; expand</td></tr>
-              <tr class="snov"><td><b>⟶ Snov.io (est.)</b></td><td style="color:var(--muted)">SaaS / Sales</td><td><span class="s-bad">~3.2%+</span></td><td style="color:var(--amber)">~105%</td><td style="color:var(--amber)">~4.8x</td><td style="color:var(--amber)">~10m</td><td style="color:var(--muted2)">⚡ Oportunidade de melhoria</td></tr>
-              <tr><td colspan="7" style="font-size:9px;color:var(--muted);padding:6px 10px">Mediana SaaS SMB (Databox 2025): churn ~7%/mês — Snov.io está abaixo da mediana, mas longe do top 10.</td></tr>
-            </tbody>
-          </table>
+
+    <!-- DIY CS -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">🧠</div>
+        <div class="proj-badges">
+          <span class="badge internal" data-pt="Interno" data-en="Internal">Interno</span>
         </div>
       </div>
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-title" style="margin-bottom:4px">O que separa os melhores?</div>
-          <div class="card-sub" style="margin-bottom:12px">Padrões comuns das top 10 no controle de churn</div>
-          <div class="insight-card blue" style="margin-bottom:8px"><div class="insight-header"><span>🔁</span><span class="insight-title">Viral Loops (Slack, Figma, Notion)</span></div><div class="insight-body">O produto cresce dentro da empresa. Snov.io pode criar isso com convite de time nas campanhas.</div></div>
-          <div class="insight-card green" style="margin-bottom:8px"><div class="insight-header"><span>🎯</span><span class="insight-title">Aha! Moment Rápido (Zoom, Canva)</span></div><div class="insight-body">43% do churn veio de clientes com 1–3 pedidos — claramente não chegaram ao momento de valor.</div></div>
-          <div class="insight-card amber"><div class="insight-header"><span>💰</span><span class="insight-title">Expansão de Receita (Stripe, Datadog)</span></div><div class="insight-body">O LIA da Snov.io tem potencial de NRR &gt; 100% — mas só 11% do churn o usava.</div></div>
-        </div>
-        <div class="card">
-          <div class="card-title" style="margin-bottom:4px">Gap da Snov.io vs Melhores</div>
-          <div class="card-sub" style="margin-bottom:12px">Onde há mais espaço para melhorar</div>
-          <div class="bar-row"><div class="bar-lbl">Churn (meta: &lt;2%)</div><div class="bar-track"><div class="bar-fill" style="width:66%;background:var(--red)">3.2% atual</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">NRR (meta: 120%+)</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:var(--amber)">~105%</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">LTV:CAC (meta: 7x+)</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--blue)">4.8x</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">Adoção LIA (meta: 40%+)</div><div class="bar-track"><div class="bar-fill" style="width:27%;background:var(--amber)">11%</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">Team ownership (meta: 40%+)</div><div class="bar-track"><div class="bar-fill" style="width:42%;background:var(--accent)">17%</div></div></div>
-          <div style="margin-top:12px;background:rgba(91,143,255,0.08);border-radius:6px;padding:12px;font-size:10px;color:var(--muted2);line-height:1.6"><b style="color:var(--blue)">Prioridade #1:</b> Reduzir churn do Starter S de ~5% para &lt;3% via onboarding reformulado — impacto direto no NRR.</div>
-        </div>
+      <div class="proj-title" data-pt="Sistema de CS" data-en="CS System">Sistema de CS</div>
+      <div class="proj-desc" data-pt="Sistema de Customer Success desenhado a partir das fraquezas das ferramentas que usamos internamente. Foco em alertas de churn, health score e visibilidade real do comportamento do cliente." data-en="Customer Success system designed around the weaknesses of the tools we use internally. Focus on churn alerts, health score, and real customer behavior visibility.">
+        Sistema de Customer Success desenhado a partir das fraquezas das ferramentas que usamos internamente. Foco em alertas de churn, health score e visibilidade real do comportamento do cliente.
+      </div>
+      <div class="proj-stack">
+        <span class="stack-tag">JavaScript</span>
+        <span class="stack-tag">Supabase</span>
+        <span class="stack-tag">HTML/CSS</span>
       </div>
     </div>
 
-    <!-- ════ PLAYBOOKS ════ -->
-    <div class="page" id="page-playbooks">
-      <div class="page-header">
-        <div class="page-title">Playbooks das <span>Top 10</span></div>
-        <div class="page-sub"><span class="live-dot"></span>Táticas reais de Slack, Notion, Figma, HubSpot, Stripe — adaptadas para Snov.io</div>
-      </div>
-      <div class="playbook-grid" id="playbook-grid"></div>
-    </div>
 
-    <!-- ════ TASKS ════ -->
-    <div class="page" id="page-tasks">
-      <div class="page-header">
-        <div class="page-title">Plano de <span>Ação</span></div>
-        <div class="page-sub"><span class="live-dot"></span>Tasks priorizadas com base nos dados reais + benchmarks globais</div>
+    <!-- CHURN ALERT - LinkedIn post -->
+    <div class="proj-card featured">
+      <div class="proj-header">
+        <div class="proj-icon">📊</div>
+        <div class="proj-badges">
+          <span class="badge internal" data-pt="Interno" data-en="Internal">Interno</span>
+        </div>
       </div>
-      <div class="grid-31">
-        <div class="card">
-          <div class="card-header">
-            <div><div class="card-title">Backlog de Ações</div><div class="card-sub">Clique para marcar como concluído</div></div>
-            <div style="display:flex;gap:6px"><span class="chip chip-red" id="open-count">0 abertas</span><span class="chip chip-green" id="done-count">0 feitas</span></div>
-          </div>
-          <div id="task-list"></div>
-        </div>
-        <div>
-          <div class="card" style="margin-bottom:14px">
-            <div class="card-title" style="margin-bottom:14px">Progresso</div>
-            <div style="text-align:center"><canvas id="progressDonut" width="160" height="160"></canvas></div>
-          </div>
-          <div class="card">
-            <div class="card-title" style="margin-bottom:12px">Por Prioridade</div>
-            <div id="priority-breakdown"></div>
-          </div>
-        </div>
+      <div class="proj-title" data-pt="Alerta de Churn com Python" data-en="Churn Alert with Python">Alerta de Churn com Python</div>
+      <div class="proj-desc" data-pt="Script de análise de churn desenvolvido internamente na Snov.io. Cruza data de compra, objetivo do cliente, uso de créditos e destinatários para gerar alertas precisos de risco antes que o churn aconteça. Pequenas mudanças de leitura de comportamento que fazem diferença no resultado de CS." data-en="Churn analysis script developed internally at Snov.io. Combines purchase date, customer goal, credit usage, and recipients to generate accurate risk alerts before churn happens. Small behavioral signals that make a real difference in CS outcomes.">
+        Script de análise de churn desenvolvido internamente na Snov.io. Cruza data de compra, objetivo do cliente, uso de créditos e destinatários para gerar alertas precisos de risco antes que o churn aconteça. Pequenas mudanças de leitura de comportamento que fazem diferença no resultado de CS.
+      </div>
+      <div class="proj-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Pandas</span>
+        <span class="stack-tag">Data Analysis</span>
       </div>
     </div>
 
-    <!-- ════ UPLOAD ════ -->
-    <div class="page" id="page-upload">
-      <div class="page-header">
-        <div class="page-title">Importar <span>Dados</span></div>
-        <div class="page-sub">Carregue seu CSV de churn e todos os dashboards atualizam automaticamente</div>
+
+
+    <!-- INVEST53 -->
+    <div class="proj-card featured">
+      <div class="proj-header">
+        <div class="proj-icon">🏢</div>
+        <div class="proj-badges">
+          <span class="badge live">Live</span>
+        </div>
       </div>
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-title" style="margin-bottom:14px">Arquivo Atual</div>
-          <div style="background:rgba(0,229,160,0.06);border:1px solid rgba(0,229,160,0.15);border-radius:7px;padding:14px;display:flex;align-items:center;gap:12px">
-            <span style="font-size:22px">📄</span>
-            <div><div style="font-size:12px;color:var(--accent)">users__3_.csv</div><div style="font-size:10px;color:var(--muted)">570 registros · Dez/25–Mar/26</div></div>
-          </div>
-          <div style="margin-top:14px">
-            <div class="bar-row"><div class="bar-lbl">Registros válidos</div><div class="bar-track"><div class="bar-fill" style="width:97%;background:var(--accent)">556</div></div><div class="bar-pct">97%</div></div>
-            <div class="bar-row"><div class="bar-lbl">Com motivo</div><div class="bar-track"><div class="bar-fill" style="width:92%;background:var(--blue)">524</div></div><div class="bar-pct">92%</div></div>
-            <div class="bar-row"><div class="bar-lbl">Com comentário</div><div class="bar-track"><div class="bar-fill" style="width:68%;background:var(--amber)">388</div></div><div class="bar-pct">68%</div></div>
-          </div>
-          <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div style="background:rgba(0,229,160,0.06);border-radius:6px;padding:9px;font-size:10px"><div style="color:var(--accent);margin-bottom:2px">✓ Email</div><div style="color:var(--muted)">Identificador único</div></div>
-            <div style="background:rgba(0,229,160,0.06);border-radius:6px;padding:9px;font-size:10px"><div style="color:var(--accent);margin-bottom:2px">✓ Reason</div><div style="color:var(--muted)">Motivo de saída</div></div>
-            <div style="background:rgba(0,229,160,0.06);border-radius:6px;padding:9px;font-size:10px"><div style="color:var(--accent);margin-bottom:2px">✓ Plan on Cancel</div><div style="color:var(--muted)">Plano no cancelamento</div></div>
-            <div style="background:rgba(0,229,160,0.06);border-radius:6px;padding:9px;font-size:10px"><div style="color:var(--accent);margin-bottom:2px">✓ Cancel dates</div><div style="color:var(--muted)">Data do cancelamento</div></div>
-            <div style="background:rgba(0,229,160,0.06);border-radius:6px;padding:9px;font-size:10px"><div style="color:var(--accent);margin-bottom:2px">✓ Total # orders</div><div style="color:var(--muted)">Engajamento histórico</div></div>
-            <div style="background:rgba(0,229,160,0.06);border-radius:6px;padding:9px;font-size:10px"><div style="color:var(--accent);margin-bottom:2px">✓ Is team owner</div><div style="color:var(--muted)">Proprietário de time</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title" style="margin-bottom:6px">Carregar Novo CSV</div>
-          <div style="font-size:10px;color:var(--muted);margin-bottom:14px">Formato: Email; Full name; Registered; Plan on Cancel Attempt; Reason...</div>
-          <label class="upload-zone" id="uploadZone">
-            <input type="file" accept=".csv" id="uploadInput" onchange="handleUpload(this)">
-            <div style="font-size:28px;margin-bottom:10px">📂</div>
-            <div style="font-size:12px;color:var(--text)">Arrastar CSV aqui ou clicar</div>
-            <div style="font-size:10px;color:var(--muted);margin-top:4px">Suporta separador ; ou ,</div>
-          </label>
-          <div id="upload-status" style="display:none;margin-top:12px">
-            <div style="background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.2);border-radius:6px;padding:12px;font-size:11px;color:var(--accent)">✓ <span id="upload-msg"></span></div>
-          </div>
-        </div>
+      <div class="proj-title" data-pt="Sistema para Imobiliária" data-en="Real Estate Management System">Sistema para Imobiliária</div>
+      <div class="proj-desc" data-pt="Sistema desenvolvido para uma imobiliária. Gestão de imóveis, clientes e operações do zero ao deploy, rodando em produção." data-en="System built for a real estate company. Property and client management from scratch to production.">
+        Sistema desenvolvido para uma imobiliária. Gestão de imóveis, clientes e operações do zero ao deploy, rodando em produção.
+      </div>
+      <div class="proj-stack">
+        <span class="stack-tag">Cloudflare Workers</span>
+        <span class="stack-tag">Supabase</span>
+        <span class="stack-tag">JavaScript</span>
       </div>
     </div>
 
-    <!-- ════ ALERTAS ════ -->
-    <div class="page" id="page-alertas">
-      <div class="page-header">
-        <div class="page-title">Alertas <span>Ativos</span></div>
-        <div class="page-sub"><span class="live-dot"></span>3 alertas críticos baseados nos seus dados reais</div>
-      </div>
 
-      <div class="kpi-strip">
-        <div class="kpi-box red"><div class="kpi-label">Alertas Críticos</div><div class="kpi-val red">3</div><div class="kpi-meta">Ação imediata necessária</div></div>
-        <div class="kpi-box amber"><div class="kpi-label">Alertas de Atenção</div><div class="kpi-val amber">4</div><div class="kpi-meta">Monitorar esta semana</div></div>
-        <div class="kpi-box blue"><div class="kpi-label">Informativos</div><div class="kpi-val blue">2</div><div class="kpi-meta">Para acompanhamento</div></div>
-        <div class="kpi-box green"><div class="kpi-label">Resolvidos</div><div class="kpi-val green">0</div><div class="kpi-meta">Nenhum resolvido ainda</div></div>
-      </div>
-
-      <div class="divider">🔴 Críticos — Ação Imediata</div>
-
-      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
-        <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:8px;padding:18px">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-            <div style="display:flex;align-items:center;gap:8px">
-              <span style="font-size:18px">🚨</span>
-              <span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--red)">395 cancelamentos no Starter S — 69% do churn total</span>
-            </div>
-            <span class="chip chip-red">CRÍTICO</span>
-          </div>
-          <div style="font-size:11px;color:var(--muted2);line-height:1.7;margin-bottom:10px">O plano Starter S concentra <b style="color:var(--text)">69% de todos os cancelamentos</b>. A maioria saiu com apenas 1–3 pedidos feitos, o que indica que o <b style="color:var(--text)">Aha! Moment não está sendo alcançado</b>. Comparando com Zoom e Canva: ambos resolveram crises similares reformulando o onboarding para entregar valor nos primeiros 10 minutos.</div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-accent" style="font-size:10px;padding:6px 12px" onclick="document.querySelector('[data-page=tasks]').click()">→ Ver plano de ação</button>
-            <button class="btn btn-ghost" style="font-size:10px;padding:6px 12px" onclick="document.querySelector('[data-page=playbooks]').click()">→ Ver playbook Zoom/Canva</button>
-          </div>
-        </div>
-
-        <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:8px;padding:18px">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-            <div style="display:flex;align-items:center;gap:8px">
-              <span style="font-size:18px">🚨</span>
-              <span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--red)">Janeiro/26 bateu recorde: 189 cancelamentos em 1 mês</span>
-            </div>
-            <span class="chip chip-red">CRÍTICO</span>
-          </div>
-          <div style="font-size:11px;color:var(--muted2);line-height:1.7;margin-bottom:10px">Janeiro foi o <b style="color:var(--text)">pior mês registrado</b> com 189 saídas — 56% acima da média. Fevereiro (188) manteve o mesmo nível. Esse padrão sugere <b style="color:var(--text)">sazonalidade de início de ano</b> (revisão de budget corporativo) ou um evento pontual. É necessário investigar se houve mudança de preço, produto ou comunicação nesse período.</div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-accent" style="font-size:10px;padding:6px 12px" onclick="document.querySelector('[data-page=churn]').click()">→ Ver análise por mês</button>
-          </div>
-        </div>
-
-        <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:8px;padding:18px">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-            <div style="display:flex;align-items:center;gap:8px">
-              <span style="font-size:18px">🚨</span>
-              <span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--red)">99 Team Owners cancelaram sem intervenção de CS</span>
-            </div>
-            <span class="chip chip-red">CRÍTICO</span>
-          </div>
-          <div style="font-size:11px;color:var(--muted2);line-height:1.7;margin-bottom:10px">Team owners representam o <b style="color:var(--text)">maior MRR por conta</b> e têm potencial de múltiplos seats. Perder 99 deles em 4 meses sem nenhuma intervenção documentada é um sinal de que não existe um processo de <b style="color:var(--text)">CS proativo para esse segmento</b>. Salesforce e HubSpot tratam team owners com QBRs e CSM dedicado.</div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-accent" style="font-size:10px;padding:6px 12px" onclick="document.querySelector('[data-page=playbooks]').click()">→ Ver playbook Salesforce</button>
-          </div>
+    <!-- TREINADOR NETO -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">💪</div>
+        <div class="proj-badges">
+          <span class="badge live">Live</span>
         </div>
       </div>
-
-      <div class="divider">🟡 Atenção — Monitorar Esta Semana</div>
-
-      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
-        <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:8px;padding:16px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-            <div style="display:flex;align-items:center;gap:8px"><span>⚠️</span><span style="font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--amber)">68 clientes escolheram "Pause" — feature inexistente</span></div>
-            <span class="chip chip-amber">ATENÇÃO</span>
-          </div>
-          <div style="font-size:11px;color:var(--muted2)">12% dos churns queriam pausar, não cancelar. Implementar pausa de plano pode recuperar esses clientes imediatamente.</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:8px;padding:16px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-            <div style="display:flex;align-items:center;gap:8px"><span>⚠️</span><span style="font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--amber)">LIA com apenas 11% de adoção entre churned users</span></div>
-            <span class="chip chip-amber">ATENÇÃO</span>
-          </div>
-          <div style="font-size:11px;color:var(--muted2)">Usuários com LIA ativo têm muito mais stickiness. Apenas 64 de 570 churns usavam o recurso — aumentar adoção reduz churn diretamente.</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:8px;padding:16px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-            <div style="display:flex;align-items:center;gap:8px"><span>⚠️</span><span style="font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--amber)">27 clientes foram para um concorrente</span></div>
-            <span class="chip chip-amber">ATENÇÃO</span>
-          </div>
-          <div style="font-size:11px;color:var(--muted2)">5% dos churns saíram por "Found an alternative". Identificar qual concorrente e o que oferece que a Snov.io não tem é urgente.</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:8px;padding:16px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-            <div style="display:flex;align-items:center;gap:8px"><span>⚠️</span><span style="font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--amber)">26 cancelamentos por budget — sem downgrade oferecido</span></div>
-            <span class="chip chip-amber">ATENÇÃO</span>
-          </div>
-          <div style="font-size:11px;color:var(--muted2)">Clientes que cancelam por preço poderiam ser retidos com downgrade para plano menor. Não existe esse fluxo atualmente.</div>
-        </div>
+      <div class="proj-title" data-pt="Robô Autônomo + Sistema para Treinador" data-en="Autonomous Bot + Trainer System">Robô Autônomo + Sistema para Treinador</div>
+      <div class="proj-desc" data-pt="Bot de WhatsApp com IA que responde alunos, cria treinos personalizados e opera sozinho. Inclui área do aluno, painel admin e sistema de pagamentos. Tudo automatizado." data-en="WhatsApp AI bot that replies to students, creates personalized workout plans, and runs autonomously. Includes student portal, admin dashboard, and payment system. Fully automated.">
+        Bot de WhatsApp com IA que responde alunos, cria treinos personalizados e opera sozinho. Inclui área do aluno, painel admin e sistema de pagamentos. Tudo automatizado.
       </div>
-
-      <div class="divider">🔵 Informativos</div>
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:8px;padding:16px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span>ℹ️</span><span style="font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--blue)">Snov.io está abaixo da mediana de churn SaaS SMB (7%)</span></div>
-          <div style="font-size:11px;color:var(--muted2)">~3.2% de churn mensal está bem abaixo da mediana de mercado. A base é boa — o objetivo agora é chegar ao nível das top 10 (1–2.5%).</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:8px;padding:16px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span>ℹ️</span><span style="font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--blue)">28% dos churns tinham 10+ pedidos — alta chance de win-back</span></div>
-          <div style="font-size:11px;color:var(--muted2)">157 clientes engajados cancelaram por mudança de contexto, não por insatisfação. São os mais fáceis de recuperar com campanha direcionada.</div>
-        </div>
+      <div class="proj-stack">
+        <span class="stack-tag">Cloudflare Workers</span>
+        <span class="stack-tag">Z-API</span>
+        <span class="stack-tag">Claude API</span>
+        <span class="stack-tag">Supabase</span>
       </div>
     </div>
 
-    <!-- ════ PERFIL DE RISCO ════ -->
-    <div class="page" id="page-risco">
-      <div class="page-header">
-        <div class="page-title">Perfil de <span>Risco</span></div>
-        <div class="page-sub"><span class="live-dot"></span>Segmentação de risco baseada nos 570 cancelamentos reais</div>
-      </div>
 
-      <div class="kpi-strip">
-        <div class="kpi-box red"><div class="kpi-label">Risco Crítico</div><div class="kpi-val red">395</div><div class="kpi-meta">Starter S · 69%</div></div>
-        <div class="kpi-box amber"><div class="kpi-label">Risco Alto</div><div class="kpi-val amber">122</div><div class="kpi-meta">Pro M · 21%</div></div>
-        <div class="kpi-box blue"><div class="kpi-label">Risco Médio</div><div class="kpi-val blue">37</div><div class="kpi-meta">Pro L + Pro S(3M)</div></div>
-        <div class="kpi-box green"><div class="kpi-label">Risco Baixo</div><div class="kpi-val green">16</div><div class="kpi-meta">Pro XL + outros</div></div>
-      </div>
-
-      <div class="card" style="margin-bottom:14px">
-        <div class="card-header">
-          <div><div class="card-title">Score de Risco por Segmento</div><div class="card-sub">Baseado em volume, engajamento, LIA e perfil de time</div></div>
-          <span class="chip chip-red">Dados reais</span>
-        </div>
-        <div style="overflow-x:auto">
-          <table class="bench-table">
-            <thead><tr><th>Segmento</th><th>Churns</th><th>% Total</th><th>Pedidos médios</th><th>Com LIA</th><th>Team Owner</th><th>Score</th><th>Ação prioritária</th></tr></thead>
-            <tbody>
-              <tr><td><b>Starter S · 1–3 pedidos</b></td><td style="color:var(--red)">~246</td><td>43%</td><td style="color:var(--red)">1.5x</td><td style="color:var(--red)">~4%</td><td>~8%</td><td><span class="s-bad">10/10</span></td><td style="color:var(--muted2)">Onboarding emergencial · aha moment</td></tr>
-              <tr><td><b>Starter S · 4–10 pedidos</b></td><td style="color:var(--amber)">~100</td><td>18%</td><td>6x</td><td>~10%</td><td>~12%</td><td><span class="s-warn">7/10</span></td><td style="color:var(--muted2)">Engajamento proativo · upsell</td></tr>
-              <tr><td><b>Pro M · todos</b></td><td style="color:var(--amber)">122</td><td>21%</td><td>8x</td><td>~14%</td><td>~22%</td><td><span class="s-warn">6/10</span></td><td style="color:var(--muted2)">CS check-in 30d · upsell para L</td></tr>
-              <tr><td><b>Starter S · 10+ pedidos</b></td><td style="color:var(--blue)">~49</td><td>9%</td><td>15x</td><td>~12%</td><td>~18%</td><td><span class="s-warn">5/10</span></td><td style="color:var(--muted2)">Win-back campaign imediata</td></tr>
-              <tr><td><b>Pro L / Pro S(3M)</b></td><td>37</td><td>6%</td><td>11x</td><td>~18%</td><td>~30%</td><td><span class="s-warn">4/10</span></td><td style="color:var(--muted2)">Custom deal · plano mensal</td></tr>
-              <tr><td><b>Pro XL+</b></td><td style="color:var(--accent)">16</td><td>3%</td><td>14x</td><td>~30%</td><td>~50%</td><td><span class="s-good">2/10</span></td><td style="color:var(--muted2)">Enterprise motion · CSM dedicado</td></tr>
-            </tbody>
-          </table>
+    <!-- GABRIEL SERRANO -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">📊</div>
+        <div class="proj-badges">
+          <span class="badge live">Live</span>
         </div>
       </div>
-
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-title" style="margin-bottom:4px">Fatores que Aumentam o Risco</div>
-          <div class="card-sub" style="margin-bottom:14px">Correlações encontradas nos dados reais</div>
-          <div class="bar-row"><div class="bar-lbl">Plano Starter S</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--red)">Risco máximo</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">1–3 pedidos feitos</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:var(--red)">Risco muito alto</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">Sem LIA ativo</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:var(--amber)">Risco alto</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">Não é team owner</div><div class="bar-track"><div class="bar-fill" style="width:60%;background:var(--amber)">Risco moderado</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">Registrado há &lt;30 dias</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--blue)">Risco moderado</div></div></div>
-        </div>
-        <div class="card">
-          <div class="card-title" style="margin-bottom:4px">Fatores que Reduzem o Risco</div>
-          <div class="card-sub" style="margin-bottom:14px">Indicadores de retenção nos dados</div>
-          <div class="bar-row"><div class="bar-lbl">LIA ativo</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent)">Proteção forte</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">10+ pedidos feitos</div><div class="bar-track"><div class="bar-fill" style="width:88%;background:var(--accent)">Proteção forte</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">É team owner</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:var(--blue)">Proteção boa</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">Plano Pro M ou superior</div><div class="bar-track"><div class="bar-fill" style="width:65%;background:var(--blue)">Proteção moderada</div></div></div>
-          <div class="bar-row"><div class="bar-lbl">Cliente há 12+ meses</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--amber)">Proteção moderada</div></div></div>
-        </div>
+      <div class="proj-title" data-pt="Sistema para Personal Trainer" data-en="Personal Trainer System">Sistema para Personal Trainer</div>
+      <div class="proj-desc" data-pt="Sistema financeiro para personal trainer com alertas automáticos de inadimplência e acusas de pagamento. Controle de alunos, mensalidades e pausas por férias rodando em produção." data-en="Financial system for a personal trainer with automatic overdue alerts and payment confirmations. Student management, monthly payments, and vacation pauses live in production.">
+        Sistema financeiro para personal trainer com alertas automáticos de inadimplência e acusas de pagamento. Controle de alunos, mensalidades e pausas por férias rodando em produção.
       </div>
-
-      <div class="divider">Scorecard de Recuperação</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center">
-          <div style="font-family:'Syne',sans-serif;font-size:28px;color:var(--accent)">68</div>
-          <div style="font-size:10px;color:var(--muted);margin-top:4px">Recuperáveis<br>via Pausa</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center">
-          <div style="font-family:'Syne',sans-serif;font-size:28px;color:var(--blue)">157</div>
-          <div style="font-size:10px;color:var(--muted);margin-top:4px">Win-back<br>(10+ pedidos)</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center">
-          <div style="font-family:'Syne',sans-serif;font-size:28px;color:var(--amber)">26</div>
-          <div style="font-size:10px;color:var(--muted);margin-top:4px">Downgrade<br>(budget)</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center">
-          <div style="font-family:'Syne',sans-serif;font-size:28px;color:var(--accent)">225</div>
-          <div style="font-size:10px;color:var(--muted);margin-top:4px">Total<br>recuperável</div>
-        </div>
+      <div class="proj-stack">
+        <span class="stack-tag">Supabase</span>
+        <span class="stack-tag">JavaScript</span>
+        <span class="stack-tag">Cloudflare Pages</span>
+        <span class="stack-tag">Z-API</span>
       </div>
     </div>
 
-    <!-- ════ RECOMENDAÇÕES ════ -->
-    <div class="page" id="page-recomendacoes">
-      <div class="page-header">
-        <div class="page-title"><span>Recomendações</span></div>
-        <div class="page-sub"><span class="live-dot"></span>Plano de 90 dias baseado nos dados reais + top 10 empresas globais</div>
-      </div>
 
-      <div class="kpi-strip">
-        <div class="kpi-box red"><div class="kpi-label">Semanas 1–2</div><div class="kpi-val red" style="font-size:16px;padding-top:4px">Quick Wins</div><div class="kpi-meta">Ações imediatas</div></div>
-        <div class="kpi-box amber"><div class="kpi-label">Semanas 3–6</div><div class="kpi-val amber" style="font-size:16px;padding-top:4px">Estrutural</div><div class="kpi-meta">Processos e produto</div></div>
-        <div class="kpi-box blue"><div class="kpi-label">Semanas 7–12</div><div class="kpi-val blue" style="font-size:16px;padding-top:4px">Escala</div><div class="kpi-meta">Crescimento sustentável</div></div>
-        <div class="kpi-box green"><div class="kpi-label">Meta 90 dias</div><div class="kpi-val green" style="font-size:16px;padding-top:4px">&lt;2.5% churn</div><div class="kpi-meta">De 3.2% → &lt;2.5%</div></div>
-      </div>
 
-      <div class="divider">🚀 Semanas 1–2 · Quick Wins</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
-        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--red);border-radius:8px;padding:18px">
-          <div style="font-size:9px;color:var(--red);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">IMPACTO: 68 clientes</div>
-          <div style="font-family:'Syne',sans-serif;font-size:14px;margin-bottom:8px">Criar opção de "Pausa de Plano"</div>
-          <div style="font-size:11px;color:var(--muted2);line-height:1.6">Feature simples: pausar cobrança por 30/60 dias. <b style="color:var(--text)">12% dos churns escolheram "Wants to pause"</b> — eles ainda querem o produto. Implementar isso no painel de cancelamento pode segurar dezenas de clientes por mês.</div>
-          <div style="margin-top:10px;font-size:10px;color:var(--muted)">Inspirado em: Notion, Slack, HubSpot</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--red);border-radius:8px;padding:18px">
-          <div style="font-size:9px;color:var(--red);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">IMPACTO: 157 clientes</div>
-          <div style="font-family:'Syne',sans-serif;font-size:14px;margin-bottom:8px">Campanha Win-Back para 10+ pedidos</div>
-          <div style="font-size:11px;color:var(--muted2);line-height:1.6">Clientes com 10+ pedidos cancelaram por <b style="color:var(--text)">mudança de contexto, não de satisfação</b>. Email sequence de 3 mensagens: 1) "Sentimos sua falta" + resultado que tiveram, 2) Oferta de 30% de desconto, 3) Novo recurso relevante.</div>
-          <div style="margin-top:10px;font-size:10px;color:var(--muted)">Inspirado em: HubSpot, Salesforce</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--amber);border-radius:8px;padding:18px">
-          <div style="font-size:9px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">IMPACTO: 99 team owners</div>
-          <div style="font-family:'Syne',sans-serif;font-size:14px;margin-bottom:8px">Alerta de CS para Team Owners em risco</div>
-          <div style="font-size:11px;color:var(--muted2);line-height:1.6">Criar tag no CRM para team owners + alerta quando ficam <b style="color:var(--text)">7 dias sem login ou sem novo pedido</b>. CS entra em contato proativamente antes do cancelamento.</div>
-          <div style="margin-top:10px;font-size:10px;color:var(--muted)">Inspirado em: Salesforce, Intercom</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--amber);border-radius:8px;padding:18px">
-          <div style="font-size:9px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">IMPACTO: 26 clientes</div>
-          <div style="font-family:'Syne',sans-serif;font-size:14px;margin-bottom:8px">Downgrade no fluxo de cancelamento</div>
-          <div style="font-size:11px;color:var(--muted2);line-height:1.6">Antes do cancelamento final: <b style="color:var(--text)">oferecer downgrade para plano mais barato</b>. Clientes que cancelam por budget (26) provavelmente aceitariam um plano XS/Trial pago a preço reduzido.</div>
-          <div style="margin-top:10px;font-size:10px;color:var(--muted)">Inspirado em: Canva, Zoom</div>
+    <!-- LIZIA -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">📋</div>
+        <div class="proj-badges">
+          <span class="badge live">Live</span>
         </div>
       </div>
-
-      <div class="divider">🔧 Semanas 3–6 · Estrutural</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
-        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--blue);border-radius:8px;padding:16px">
-          <div style="font-size:9px;color:var(--blue);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">PRODUTO</div>
-          <div style="font-family:'Syne',sans-serif;font-size:13px;margin-bottom:7px">Reformular Onboarding Starter S</div>
-          <div style="font-size:10px;color:var(--muted2);line-height:1.6">43% dos churns tinham apenas 1–3 pedidos. Criar fluxo guiado de 7 dias com template de campanha pronto para usar no 1º dia. Meta: usuário envia primeira campanha em &lt;10 min.</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--blue);border-radius:8px;padding:16px">
-          <div style="font-size:9px;color:var(--blue);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">CS / DADOS</div>
-          <div style="font-family:'Syne',sans-serif;font-size:13px;margin-bottom:7px">Criar Health Score no CRM</div>
-          <div style="font-size:10px;color:var(--muted2);line-height:1.6">Score simples: pedidos (40pts) + LIA ativo (30pts) + login recente (20pts) + é team owner (10pts). Abaixo de 40: trigger automático de CS. Acima de 80: candidato a upsell.</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--blue);border-radius:8px;padding:16px">
-          <div style="font-size:9px;color:var(--blue);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">PRODUTO</div>
-          <div style="font-family:'Syne',sans-serif;font-size:13px;margin-bottom:7px">Push de Adoção do LIA</div>
-          <div style="font-size:10px;color:var(--muted2);line-height:1.6">Apenas 11% dos churns usavam LIA. Criar in-app prompt no dia 3 de uso sugerindo LinkedIn Automation com caso de uso concreto. Meta: 30% de adoção entre usuários ativos.</div>
-        </div>
+      <div class="proj-title" data-pt="Sistema para Gerente de Projetos" data-en="Project Management System">Sistema para Gerente de Projetos</div>
+      <div class="proj-desc" data-pt="Sistema de gerenciamento de projetos construído sob medida para uma gestora. Controle de tarefas, prazos e entregas simples de usar, sem depender de ferramentas genéricas." data-en="Project management system built for a specific project manager. Task control, deadlines, and deliverables simple to use, no reliance on generic tools.">
+        Sistema de gerenciamento de projetos construído sob medida para uma gestora. Controle de tarefas, prazos e entregas simples de usar, sem depender de ferramentas genéricas.
       </div>
-
-      <div class="divider">📈 Semanas 7–12 · Escala</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
-        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--accent);border-radius:8px;padding:16px">
-          <div style="font-size:9px;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">CRESCIMENTO</div>
-          <div style="font-family:'Syne',sans-serif;font-size:13px;margin-bottom:7px">Viral Loop de Times</div>
-          <div style="font-size:10px;color:var(--muted2);line-height:1.6">Incentivar Starter S a convidar membros de time. Cada convite aceito = créditos extras. PLG como Slack e Figma: o produto cresce dentro das empresas.</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--accent);border-radius:8px;padding:16px">
-          <div style="font-size:9px;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">DADOS</div>
-          <div style="font-family:'Syne',sans-serif;font-size:13px;margin-bottom:7px">MRR Bridge Mensal</div>
-          <div style="font-size:10px;color:var(--muted2);line-height:1.6">Implementar dashboard de MRR com breakdown: Novo + Expansão – Contração – Churn. Medir NRR mensalmente. Meta de NRR: 115% em 90 dias.</div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--accent);border-radius:8px;padding:16px">
-          <div style="font-size:9px;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">ESTRATÉGIA</div>
-          <div style="font-family:'Syne',sans-serif;font-size:13px;margin-bottom:7px">Cohort Analysis Mensal</div>
-          <div style="font-size:10px;color:var(--muted2);line-height:1.6">Rastrear retenção de cada coorte de aquisição. Comparar coorte pré e pós onboarding novo. Isso vai provar o ROI de cada melhoria e guiar as próximas decisões.</div>
-        </div>
-      </div>
-
-      <div style="background:rgba(0,229,160,0.06);border:1px solid rgba(0,229,160,0.2);border-radius:8px;padding:20px">
-        <div style="font-family:'Syne',sans-serif;font-size:16px;color:var(--accent);margin-bottom:8px">Meta: Churn de 3.2% → &lt;2.5% em 90 dias</div>
-        <div style="font-size:11px;color:var(--muted2);line-height:1.7">Se apenas as 3 ações de Quick Win forem executadas (pausa + win-back + downgrade), o potencial de recuperação imediata é de <b style="color:var(--text)">225 clientes</b>. Com o onboarding reformulado e o health score funcionando, a projeção é reduzir o churn mensal do Starter S de ~5% para ~2.5%, alinhando a Snov.io com o benchmark das melhores empresas SaaS do mundo.</div>
-        <button class="btn btn-accent" style="margin-top:14px" onclick="document.querySelector('[data-page=tasks]').click()">→ Começar pelo Plano de Ação</button>
+      <div class="proj-stack">
+        <span class="stack-tag">Supabase</span>
+        <span class="stack-tag">JavaScript</span>
+        <span class="stack-tag">HTML/CSS</span>
       </div>
     </div>
 
-    <!-- ════ INSIGHTS ════ -->
-    <div class="page" id="page-insights">
-      <div class="page-header">
-        <div class="page-title">AI <span>Insights</span></div>
-        <div class="page-sub"><span class="live-dot"></span>Análise automática: dados reais + benchmarks top 10</div>
+
+    <!-- MYPLAN -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">🗺️</div>
+        <div class="proj-badges">
+          <span class="badge personal" data-pt="Pessoal" data-en="Personal">Pessoal</span>
+        </div>
       </div>
-      <div id="insights-list"></div>
+      <div class="proj-title" data-pt="Sistema de Estudo de Inglês" data-en="English Learning System">Sistema de Estudo de Inglês</div>
+      <div class="proj-desc" data-pt="Sistema pessoal de estudo de inglês focado em vocabulário de Sales e RevOps. Com roadmap, flashcards, speaking e progresso diário construído porque nenhuma ferramenta existente servia para o meu objetivo." data-en="Personal English learning system focused on Sales and RevOps vocabulary. With roadmap, flashcards, speaking practice, and daily progress built because no existing tool fit my goal.">
+        Sistema pessoal de estudo de inglês focado em vocabulário de Sales e RevOps. Com roadmap, flashcards, speaking e progresso diário construído porque nenhuma ferramenta existente servia para o meu objetivo.
+      </div>
+      <div class="proj-stack">
+        <span class="stack-tag">Claude API</span>
+        <span class="stack-tag">localStorage</span>
+        <span class="stack-tag">JavaScript</span>
+      </div>
+    </div>
+
+
+
+    <!-- FINANCEIRO PESSOAL -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">💰</div>
+        <div class="proj-badges">
+          <span class="badge personal" data-pt="Pessoal" data-en="Personal">Pessoal</span>
+        </div>
+      </div>
+      <div class="proj-title" data-pt="Planilhas Financeiras Personalizadas" data-en="Personalized Financial Dashboards">Planilhas Financeiras Personalizadas</div>
+      <div class="proj-desc" data-pt="Sistemas de controle financeiro pessoal desenvolvidos sob medida para diferentes perfis. Gestão de contas fixas, parcelas, contas em atraso, transações mensais e alertas automáticos. Ajustáveis e salvos direto no navegador, sem servidor." data-en="Custom personal finance dashboards built for different profiles. Fixed bills, installments, overdue accounts, monthly transactions, and automatic alerts. Fully adjustable and saved locally in the browser, no server required.">
+        Sistemas de controle financeiro pessoal desenvolvidos sob medida para diferentes perfis. Gestão de contas fixas, parcelas, contas em atraso, transações mensais e alertas automáticos. Ajustáveis e salvos direto no navegador, sem servidor.
+      </div>
+      <div class="proj-stack">
+        <span class="stack-tag">JavaScript</span>
+        <span class="stack-tag">localStorage</span>
+        <span class="stack-tag">HTML/CSS</span>
+      </div>
     </div>
 
   </div>
 </div>
-</div>
 
-<!-- Modal -->
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <span class="modal-close" onclick="closeModal()">×</span>
-    <div class="modal-title">Nova Ação</div>
-    <div class="modal-sub">Adicionar ao plano de retenção da Snov.io</div>
-    <input id="new-task-title" class="modal-input" placeholder="Título da ação...">
-    <select id="new-task-priority" class="modal-input">
-      <option value="high">Alta prioridade</option>
-      <option value="medium">Média prioridade</option>
-      <option value="low">Baixa prioridade</option>
-    </select>
-    <select id="new-task-tag" class="modal-input">
-      <option>Onboarding</option><option>Retenção</option><option>Win-back</option>
-      <option>Produto</option><option>CS</option><option>Dados</option>
-    </select>
-    <button class="btn btn-accent" style="width:100%;padding:10px;margin-top:4px" onclick="addTask()">Adicionar Ação</button>
-  </div>
-</div>
+<footer>
+  <div class="footer-name">Lucas Maia</div>
+  <div class="footer-copy">© 2026 · Lucas Maia · Florianópolis, Brasil</div>
+</footer>
 
 <script>
-// ══ DATA ══
-const DATA = {
-  reasons:{'No longer needs Snov.io':290,'Other':70,'Wants to pause':68,'Not satisfied':58,'Found alternative':27,'Budget':26,'Anti auto-renewal':29},
-  plans:{S:395,M:122,L:22,'Pro S(3M)':15,'Pro XL':5,'Pro(P5K)':5,'XS/Trial':3},
-  monthly:{Dec25:121,Jan26:189,Feb26:188,Mar26:79},
-  total:570
-};
-
-const PLAYBOOKS = [
-  {company:'Slack',color:'#4A154B',logo:'S',title:'O Hook das 2.000 Mensagens',body:'Slack descobriu que times que trocam 2.000+ mensagens raramente cancelam. Para Snov.io: encontrar o equivalente — ex: 10 campanhas enviadas ou 500 leads exportados — e fazer TUDO para chegar lá.',impact:'+42% retenção no trial',tag:'Onboarding',barColor:'#4A154B',done:false},
-  {company:'Notion',color:'#000',logo:'N',title:'Templates como Motor de Retenção',body:'Notion criou centenas de templates prontos para ativar usuários. Para Snov.io: criar sequências de email prontas, templates de ICP, cadências por indústria. Usuário chega ao valor sem esforço.',impact:'+35% ativação',tag:'Produto',barColor:'#555',done:false},
-  {company:'Figma',color:'#F24E1E',logo:'F',title:'Colaboração como Viral Loop',body:'Figma cresceu porque designers precisam mostrar o trabalho ao time. Para Snov.io: incentivar compartilhamento de campanhas com time, co-acesso a sequências. Cada usuário traz mais usuários.',impact:'+60% expansão',tag:'Produto',barColor:'#F24E1E',done:false},
-  {company:'HubSpot',color:'#FF7A59',logo:'H',title:'Health Score Proativo',body:'HubSpot usa health score com base em uso, suporte e engajamento para agir antes do cancelamento. Para Snov.io: criar score (pedidos + LIA + login) e acionar CS quando cai abaixo do threshold.',impact:'-30% churn',tag:'CS',barColor:'#FF7A59',done:false},
-  {company:'Canva',color:'#00C4CC',logo:'C',title:'Free → Paid pelo Contexto de Time',body:'Canva é grátis individualmente. O upgrade acontece naturalmente quando você convida um time. Snov.io pode dar Starter S "quase grátis" e cobrar no contexto de equipe — múltiplos usuários.',impact:'+55% conversão',tag:'Retenção',barColor:'#00C4CC',done:false},
-  {company:'Stripe',color:'#635BFF',logo:'St',title:'Expansão pelo Uso (Land & Expand)',body:'Stripe cresce com o cliente. Cada novo produto (Radar, Billing, Connect) retém e expande MRR. Para Snov.io: LIA é o produto de expansão natural. Meta: 40%+ dos pagantes usando LIA.',impact:'NRR 140%+',tag:'Expansão',barColor:'#635BFF',done:false},
-  {company:'Intercom',color:'#1F8EFF',logo:'I',title:'In-App Intervention no Momento Certo',body:'Intercom dispara mensagens in-app quando detecta risco. Para Snov.io: se usuário Starter S não faz pedido em 7 dias → mensagem automática com template de campanha + oferta de ajuda.',impact:'-25% early churn',tag:'CS',barColor:'#1F8EFF',done:false},
-  {company:'Datadog',color:'#774AA4',logo:'D',title:'Usage-Based como Retenção Natural',body:'Datadog cobra por uso — quanto mais o cliente cresce, mais paga. Para Snov.io: créditos flexíveis podem reduzir churn de "não uso suficiente" e criar elasticidade de valor.',impact:'NRR 130%+',tag:'Produto',barColor:'#774AA4',done:false},
-  {company:'Zoom',color:'#2D8CFF',logo:'Z',title:'Onboarding em Menos de 3 Minutos',body:'Zoom foi adotado porque funcionou em 1 clique. 43% do churn Snov.io veio de usuários com 1–3 pedidos — provável fricção no setup. Simplificar = salvar ~246 clientes/trimestre.',impact:'+43% ativação',tag:'Onboarding',barColor:'#2D8CFF',done:false},
-  {company:'Salesforce',color:'#00A1E0',logo:'Sf',title:'CSM Dedicado para Team Owners',body:'Salesforce tem CSM para contas enterprise. 99 team owners cancelaram sem intervenção documentada. Um QBR trimestral ou check-in mensal para esse grupo pode mudar o cenário rapidamente.',impact:'-50% churn enterprise',tag:'CS',barColor:'#00A1E0',done:false},
-];
-
-const INSIGHTS = [
-  {type:'red',icon:'🚨',title:'Starter S: Crise de Onboarding',body:'<b>395 de 570 cancelamentos</b> vieram do Starter S (69%). O padrão das top empresas (Zoom, Canva) é reduzir o time-to-value para menos de 10 minutos. Prioridade #1: <b>encontrar e acelerar o Aha! Moment do Starter S</b>.',cta:'tasks'},
-  {type:'amber',icon:'⏸️',title:'68 Clientes Querem Pausar — Feature Inexistente',body:'<b>12% dos churns</b> escolheram "Wants to pause". Slack, Notion e HubSpot têm pausas ou downgrade temporário. Implementar essa feature pode recuperar até <b>68 clientes/trimestre imediatamente</b>.',cta:'tasks'},
-  {type:'blue',icon:'🔁',title:'LIA: O Produto de Expansão Subutilizado',body:'Apenas <b>11% dos churns usavam LinkedIn Automation</b>. Figma e Datadog provaram que expansão de produto é o melhor anti-churn. Elevar adoção de LIA de 11% para 30%+ pode levar o NRR a ultrapassar 115%.',cta:'playbooks'},
-  {type:'green',icon:'♻️',title:'157 Clientes Recuperáveis Agora',body:'Clientes com <b>10+ pedidos</b> que cancelaram conhecem o produto. HubSpot e Salesforce fazem campanhas específicas para esse segmento. Uma sequência de 3 emails + oferta pode recuperar <b>20–30% desse grupo</b>.',cta:'tasks'},
-  {type:'red',icon:'👥',title:'99 Team Owners Cancelaram',body:'Team owners representam o maior potencial de expansão. Salesforce dedica CSM específico para esse perfil. <b>99 team owners</b> cancelaram sem intervenção. Criar alerta de CS para essa categoria é prioritário.',cta:'playbooks'},
-  {type:'blue',icon:'📊',title:'Snov.io está acima da mediana SMB — mas longe do top 10',body:'Mediana de churn SaaS SMB (Databox 2025): <b>7%/mês</b>. Snov.io está em ~3.2% — ótimo vs. mediana. Mas o top 10 fica entre 1–2.5%. O caminho: PLG loops, expansão via LIA, onboarding reformulado.',cta:'benchmark'},
-];
-
-const TASKS_KEY = 'snovio_os_tasks_v2';
-const DEFAULT_TASKS = [
-  {id:1,title:'Mapear o "Aha! Moment" do Starter S — qual ação leva à retenção?',tag:'Onboarding',priority:'high',done:false,source:'Slack/Figma PLG'},
-  {id:2,title:'Criar fluxo de onboarding guiado para os primeiros 7 dias',tag:'Onboarding',priority:'high',done:false,source:'Canva/Zoom'},
-  {id:3,title:'Implementar feature de "Pausa de plano" — 68 churns/mês diretos',tag:'Produto',priority:'high',done:false,source:'Dados reais'},
-  {id:4,title:'Montar campanha win-back para os 157 clientes com 10+ pedidos',tag:'Win-back',priority:'high',done:false,source:'Dados reais'},
-  {id:5,title:'Criar Health Score no CRM: uso + pedidos + LIA + login recente',tag:'CS',priority:'medium',done:false,source:'HubSpot'},
-  {id:6,title:'Aumentar adoção do LIA (LinkedIn Automation) de 11% → 30%+',tag:'Produto',priority:'high',done:false,source:'Dados reais'},
-  {id:7,title:'Criar alerta automático: 0 pedidos em 14 dias → trigger de CS',tag:'CS',priority:'medium',done:false,source:'Intercom'},
-  {id:8,title:'Montar MRR Bridge mensal: Novo + Expansão – Contração – Churn',tag:'Dados',priority:'medium',done:false,source:'Stripe/ChartMogul'},
-  {id:9,title:'Segmentar ICP: comparar perfil de retidos vs. churned',tag:'Dados',priority:'medium',done:false,source:'Dados reais'},
-  {id:10,title:'Criar plano de downgrade para clientes "budget" → evitar cancelamento',tag:'Retenção',priority:'medium',done:false,source:'Dados reais'},
-  {id:11,title:'Implementar NPS in-app no dia 30 e dia 90',tag:'CS',priority:'medium',done:false,source:'HubSpot/Notion'},
-  {id:12,title:'Benchmarking mensal: Snov.io vs mediana SaaS SMB (7%)',tag:'Dados',priority:'low',done:false,source:'Databox Benchmark'},
-  {id:13,title:'Criar cohort analysis: clientes de Jan/26 — retenção mensal',tag:'Dados',priority:'medium',done:false,source:'Stripe/Amplitude'},
-  {id:14,title:'Loop viral: incentivar convite de membros de time no Starter S',tag:'Produto',priority:'low',done:false,source:'Slack/Figma'},
-  {id:15,title:'Relatório executivo semanal: Churn + MRR + Expansão em 1 página',tag:'Dados',priority:'low',done:false,source:'Salesforce/Geckoboard'},
-];
-
-// ══ NAVIGATION ══
-document.querySelectorAll('.nav-item[data-page]').forEach(item=>{
-  item.addEventListener('click',()=>{
-    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-    item.classList.add('active');
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    const pg = document.getElementById('page-'+item.dataset.page);
-    if(pg) pg.classList.add('active');
-    document.getElementById('crumb-text').textContent = item.textContent.replace(/\d+/g,'').trim();
-    if(item.dataset.page==='tasks') renderTasks();
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b=>{if(b.textContent===lang.toUpperCase())b.classList.add('active')});
+  document.documentElement.lang=lang==='pt'?'pt-BR':'en';
+  document.querySelectorAll('[data-'+lang+']').forEach(el=>{
+    const val=el.getAttribute('data-'+lang);
+    el.innerHTML=val;
+  });
+  document.querySelectorAll('.badge.live').forEach(b=>b.textContent='Live');
+  document.querySelectorAll('.badge.internal').forEach(b=>b.textContent=lang==='pt'?'Interno':'Internal');
+  document.querySelectorAll('.badge.wip').forEach(b=>b.textContent=lang==='pt'?'Em breve':'Coming soon');
+  document.querySelectorAll('.badge.personal').forEach(b=>b.textContent=lang==='pt'?'Pessoal':'Personal');
+  document.querySelectorAll('.badge.conceito, .badge[data-pt="Conceito"]').forEach(b=>b.textContent=lang==='pt'?'Conceito':'Concept');
+}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const el=document.querySelector(a.getAttribute('href'));
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
-
-// ══ RENDER OVERVIEW ══
-function renderReasonsBars(){
-  const el = document.getElementById('reasons-bars'); if(!el) return;
-  const max = Math.max(...Object.values(DATA.reasons));
-  const colors = ['#ff5757','#5a6478','#5b8fff','#f0c040','#ff9d3d','#00e5a0','#c084fc'];
-  el.innerHTML = Object.entries(DATA.reasons).map(([k,v],i)=>`
-    <div class="bar-row">
-      <div class="bar-lbl">${k}</div>
-      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/max*100)}%;background:${colors[i]}">${v}</div></div>
-      <div class="bar-pct">${Math.round(v/DATA.total*100)}%</div>
-    </div>`).join('');
-}
-
-function renderMonthChart(){
-  const el = document.getElementById('month-chart'); if(!el) return;
-  const max = Math.max(...Object.values(DATA.monthly));
-  const mc = {Dec25:{l:'Dez/25',c:'#5b8fff'},Jan26:{l:'Jan/26',c:'#ff5757'},Feb26:{l:'Fev/26',c:'#f0c040'},Mar26:{l:'Mar/26',c:'#00e5a0'}};
-  el.innerHTML = Object.entries(DATA.monthly).map(([k,v])=>`
-    <div class="mc-col">
-      <div class="mc-val">${v}</div>
-      <div class="mc-bar" style="height:${Math.round(v/max*68)}px;background:${mc[k].c};opacity:.85;min-height:6px"></div>
-      <div class="mc-label">${mc[k].l}</div>
-    </div>`).join('');
-}
-
-function renderPlansBars(){
-  const el = document.getElementById('plans-bars'); if(!el) return;
-  const max = DATA.plans.S;
-  const colors = ['#ff5757','#f0c040','#5b8fff','#ff9d3d','#c084fc','#00e5a0','#5a6478'];
-  el.innerHTML = Object.entries(DATA.plans).map(([k,v],i)=>`
-    <div class="bar-row">
-      <div class="bar-lbl">${k}</div>
-      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/max*100)}%;background:${colors[i]}">${v}</div></div>
-      <div class="bar-pct">${Math.round(v/DATA.total*100)}%</div>
-    </div>`).join('');
-}
-
-function drawEngagementDonut(){
-  const c = document.getElementById('engagementDonut'); if(!c) return;
-  c.width = c.parentElement?.clientWidth || 300; c.height = 160;
-  const ctx = c.getContext('2d');
-  const cx = c.width/2, cy = 72, r = 58, inner = 38;
-  const segments = [{v:246,c:'#ff5757'},{v:167,c:'#f0c040'},{v:157,c:'#00e5a0'}];
-  const tot = segments.reduce((s,d)=>s+d.v,0);
-  let angle = -Math.PI/2;
-  ctx.clearRect(0,0,c.width,c.height);
-  segments.forEach(d=>{
-    const slice=(d.v/tot)*Math.PI*2;
-    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,angle,angle+slice);
-    ctx.closePath(); ctx.fillStyle=d.c; ctx.globalAlpha=.85; ctx.fill(); angle+=slice;
-  });
-  ctx.globalAlpha=1;
-  ctx.beginPath(); ctx.arc(cx,cy,inner,0,Math.PI*2); ctx.fillStyle='#0f1318'; ctx.fill();
-  ctx.fillStyle='#dde3ee'; ctx.textAlign='center';
-  ctx.font='bold 15px "Syne",sans-serif'; ctx.fillText('570',cx,cy+5);
-  ctx.fillStyle='#5a6478'; ctx.font='8px "DM Mono",monospace'; ctx.fillText('churns',cx,cy+17);
-}
-
-// ══ CHURN PAGE ══
-function renderComments(){
-  const tags = ['not need now','budget','no results','complicated','auto-renewal','moving platform','project ended','campaigns paused','no longer active','unclear value'];
-  const el = document.getElementById('comment-tags'); if(!el) return;
-  el.innerHTML = tags.map(t=>`<span style="font-size:9px;padding:3px 9px;border-radius:20px;background:var(--surface2);border:1px solid var(--border);color:var(--muted2)">${t}</span>`).join('');
-  const phrases = [
-    {text:'"No longer needs Snov.io"',n:290,pct:'51%'},
-    {text:'"Not planning to continue"',n:68,pct:'12%'},
-    {text:'"No longer working in sales"',n:45,pct:'8%'},
-    {text:'"Moving to another platform"',n:27,pct:'5%'},
-    {text:'"Budget / high cost"',n:26,pct:'5%'},
-  ];
-  const el2 = document.getElementById('comment-phrases'); if(!el2) return;
-  el2.innerHTML = phrases.map(p=>`
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px">
-      <span style="color:var(--muted2);font-style:italic">${p.text}</span>
-      <span style="color:var(--muted)">${p.n}x · ${p.pct}</span>
-    </div>`).join('');
-}
-
-// ══ PLAYBOOKS ══
-function renderPlaybooks(){
-  const grid = document.getElementById('playbook-grid'); if(!grid) return;
-  grid.innerHTML = PLAYBOOKS.map((p,i)=>`
-    <div class="pb-card ${p.done?'done':''}" style="border-top:2px solid ${p.barColor}" onclick="togglePB(${i})">
-      <div class="pb-company">
-        <div class="pb-logo" style="background:${p.color}">${p.logo}</div>
-        <div><div style="font-size:11px;color:var(--text)">${p.company}</div><div class="pb-company-name">${p.tag}</div></div>
-      </div>
-      <div class="pb-title">${p.title}</div>
-      <div class="pb-body">${p.body}</div>
-      <div class="pb-impact">● Impacto estimado: <b>${p.impact}</b></div>
-    </div>`).join('');
-}
-function togglePB(i){ PLAYBOOKS[i].done=!PLAYBOOKS[i].done; renderPlaybooks(); }
-
-// ══ TASKS ══
-function getTasks(){ try{return JSON.parse(localStorage.getItem(TASKS_KEY))||DEFAULT_TASKS;}catch{return DEFAULT_TASKS;} }
-function saveTasks(t){ try{localStorage.setItem(TASKS_KEY,JSON.stringify(t));}catch{} }
-
-function renderTasks(){
-  const tasks = getTasks();
-  const list = document.getElementById('task-list'); if(!list) return;
-  list.innerHTML = tasks.map(t=>`
-    <div class="task-item">
-      <div class="task-check ${t.done?'checked':''}" onclick="toggleTask(${t.id})">${t.done?'✓':''}</div>
-      <div class="task-body">
-        <div class="task-title ${t.done?'done':''}">${t.title}</div>
-        <div class="task-meta">
-          <span class="task-tag">${t.tag}</span>
-          <span class="task-priority ${t.priority}">${t.priority==='high'?'Alta':t.priority==='medium'?'Média':'Baixa'}</span>
-          <span class="task-source">via ${t.source}</span>
-        </div>
-      </div>
-    </div>`).join('');
-  const open=tasks.filter(t=>!t.done).length, done=tasks.filter(t=>t.done).length;
-  const oc=document.getElementById('open-count'), dc=document.getElementById('done-count');
-  if(oc) oc.textContent=open+' abertas';
-  if(dc) dc.textContent=done+' feitas';
-  drawProgressDonut(done,tasks.length);
-  renderPriorityBreakdown(tasks);
-}
-
-function toggleTask(id){
-  const tasks=getTasks(), t=tasks.find(x=>x.id===id);
-  if(t) t.done=!t.done;
-  saveTasks(tasks); renderTasks();
-}
-
-function addTask(){
-  const title=document.getElementById('new-task-title')?.value.trim(); if(!title) return;
-  const tasks=getTasks();
-  tasks.unshift({id:Date.now(),title,tag:document.getElementById('new-task-tag').value,priority:document.getElementById('new-task-priority').value,done:false,source:'Manual'});
-  saveTasks(tasks); closeModal();
-  document.getElementById('new-task-title').value='';
-  if(document.getElementById('page-tasks').classList.contains('active')) renderTasks();
-}
-
-function drawProgressDonut(done,total){
-  const c=document.getElementById('progressDonut'); if(!c) return;
-  const ctx=c.getContext('2d'), cx=80,cy=80,r=65,inner=46, pct=done/total;
-  ctx.clearRect(0,0,160,160);
-  ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fillStyle='#141820'; ctx.fill();
-  ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+pct*Math.PI*2); ctx.closePath(); ctx.fillStyle='#00e5a0'; ctx.globalAlpha=.85; ctx.fill();
-  ctx.globalAlpha=1;
-  ctx.beginPath(); ctx.arc(cx,cy,inner,0,Math.PI*2); ctx.fillStyle='#0f1318'; ctx.fill();
-  ctx.fillStyle='#dde3ee'; ctx.textAlign='center';
-  ctx.font='bold 18px "Syne",sans-serif'; ctx.fillText(Math.round(pct*100)+'%',cx,cy+5);
-  ctx.fillStyle='#5a6478'; ctx.font='8px "DM Mono",monospace'; ctx.fillText(done+'/'+total,cx,cy+19);
-}
-
-function renderPriorityBreakdown(tasks){
-  const el=document.getElementById('priority-breakdown'); if(!el) return;
-  const h=tasks.filter(t=>t.priority==='high'), m=tasks.filter(t=>t.priority==='medium'), l=tasks.filter(t=>t.priority==='low');
-  const row=(label,items,color)=>`<div class="bar-row"><div class="bar-lbl">${label} (${items.filter(t=>t.done).length}/${items.length})</div><div class="bar-track"><div class="bar-fill" style="width:${items.length?Math.round(items.filter(t=>t.done).length/items.length*100):0}%;background:${color}">${items.filter(t=>t.done).length} feitas</div></div></div>`;
-  el.innerHTML = row('Alta',h,'var(--red)')+row('Média',m,'var(--amber)')+row('Baixa',l,'var(--accent)');
-}
-
-// ══ INSIGHTS ══
-function renderInsights(){
-  const el=document.getElementById('insights-list'); if(!el) return;
-  el.innerHTML=INSIGHTS.map(ins=>`
-    <div class="insight-card ${ins.type}">
-      <div class="insight-header"><span class="insight-icon">${ins.icon}</span><span class="insight-title">${ins.title}</span></div>
-      <div class="insight-body">${ins.body}</div>
-      <div class="insight-cta" onclick="goTo('${ins.cta}')">Ver em detalhes →</div>
-    </div>`).join('');
-}
-
-function goTo(page){
-  const item=document.querySelector('[data-page="'+page+'"]');
-  if(item) item.click();
-}
-
-// ══ MODAL ══
-function showModal(){ document.getElementById('modal').classList.add('open'); }
-function closeModal(){ document.getElementById('modal').classList.remove('open'); }
-document.getElementById('modal').addEventListener('click',e=>{ if(e.target===document.getElementById('modal')) closeModal(); });
-
-// ══ PILLS ══
-function setPill(el){ document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active')); el.classList.add('active'); }
-
-// ══ UPLOAD ══
-function handleUpload(input){
-  const file=input.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const lines=e.target.result.split('\n').filter(l=>l.trim());
-    document.getElementById('upload-status').style.display='block';
-    document.getElementById('upload-msg').textContent=`${lines.length-1} registros carregados de "${file.name}"!`;
-  };
-  reader.readAsText(file);
-}
-const uz=document.getElementById('uploadZone');
-if(uz){
-  uz.addEventListener('dragover',e=>{e.preventDefault();uz.classList.add('drag');});
-  uz.addEventListener('dragleave',()=>uz.classList.remove('drag'));
-  uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('drag');const f=e.dataTransfer.files[0];if(f){const inp=document.getElementById('uploadInput');inp.files=e.dataTransfer.files;handleUpload(inp);}});
-}
-
-// ══ EXPORT ══
-function exportData(){
-  const rows=[['Motivo','Quantidade','%'],...Object.entries(DATA.reasons).map(([k,v])=>[k,v,Math.round(v/DATA.total*100)+'%'])];
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.map(r=>r.join(',')).join('\n'));
-  a.download='snovio_churn_analysis.csv'; a.click();
-}
-
-// ══ INIT ══
-window.addEventListener('load',()=>{
-  renderReasonsBars();
-  renderMonthChart();
-  renderPlansBars();
-  drawEngagementDonut();
-  renderComments();
-  renderPlaybooks();
-  renderInsights();
-  renderTasks();
-});
-window.addEventListener('resize', drawEngagementDonut);
 </script>
 </body>
 </html>
